@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPI Products</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-primary:#0d0d0d;--bg-secondary:#141418;--bg-card:#1a1a22;
+  --steel-blue:#4a6fa5;--steel-light:#6b8fc4;--accent:#f5a623;--accent-hot:#ff6b2b;
+  --text-primary:#e8e8ec;--text-secondary:#9a9ab0;--text-muted:#5e5e72;
+  --font-body:'Inter',sans-serif;--font-display:'Oswald',sans-serif;
+  --radius:8px;--transition:0.3s cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ---- NAV ---- */
+#navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:20px 0;transition:var(--transition)}
+#navbar.scrolled{background:rgba(13,13,13,.95);backdrop-filter:blur(12px);padding:12px 0;box-shadow:0 2px 24px rgba(0,0,0,.4)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.nav-logo span{color:var(--text-primary)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--text-secondary);transition:var(--transition)}
+.nav-links a:hover{color:var(--accent)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);transition:var(--transition)}
+
+/* ---- HERO ---- */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d0d0d 0%,#1a1a2e 40%,#16213e 70%,#0d0d0d 100%);background-size:400% 400%;animation:heroGradient 12s ease infinite}
+@keyframes heroGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 0%,var(--bg-primary) 75%)}
+
+/* Spark particles */
+.sparks{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.spark{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--accent);opacity:0;animation:sparkFloat linear infinite}
+.spark:nth-child(1){left:10%;animation-duration:4s;animation-delay:0s}
+.spark:nth-child(2){left:25%;animation-duration:5s;animation-delay:1.2s;width:2px;height:2px;background:var(--accent-hot)}
+.spark:nth-child(3){left:45%;animation-duration:3.5s;animation-delay:.5s}
+.spark:nth-child(4){left:60%;animation-duration:6s;animation-delay:2s;width:4px;height:4px}
+.spark:nth-child(5){left:75%;animation-duration:4.5s;animation-delay:.8s;background:var(--accent-hot)}
+.spark:nth-child(6){left:88%;animation-duration:5.5s;animation-delay:1.5s;width:2px;height:2px}
+.spark:nth-child(7){left:35%;animation-duration:3.8s;animation-delay:2.5s;background:#ffd700}
+.spark:nth-child(8){left:55%;animation-duration:4.2s;animation-delay:3s;width:2px;height:2px;background:var(--accent-hot)}
+@keyframes sparkFloat{0%{bottom:-5%;opacity:0;transform:translateX(0)}10%{opacity:1}50%{opacity:.6;transform:translateX(20px)}90%{opacity:.2}100%{bottom:105%;opacity:0;transform:translateX(-15px)}}
+
+.hero-content{position:relative;text-align:center;max-width:800px;padding:0 24px}
+.hero-tag{font-family:var(--font-display);font-size:.875rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.hero-headline{font-family:var(--font-display);font-size:clamp(2.5rem,7vw,5.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:2px;margin-bottom:24px;background:linear-gradient(135deg,var(--text-primary) 0%,var(--steel-light) 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.125rem;color:var(--text-secondary);max-width:560px;margin:0 auto 40px;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 40px;font-family:var(--font-display);font-size:1rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:var(--radius);cursor:pointer;transition:var(--transition)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-hot));color:#0d0d0d;box-shadow:0 4px 24px rgba(245,166,35,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,166,35,.4)}
+.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--accent);color:#0d0d0d}
+
+/* ---- SECTION BASE ---- */
+section{padding:100px 0}
+.section-tag{font-family:var(--font-display);font-size:.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
+.section-desc{color:var(--text-secondary);max-width:600px;line-height:1.7}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header .section-desc{margin:0 auto}
+
+/* ---- REVEAL ANIMATION ---- */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.15s}
+.reveal-delay-2{transition-delay:.3s}
+.reveal-delay-3{transition-delay:.45s}
+
+/* ---- ABOUT ---- */
+#about{background:var(--bg-secondary)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-image{position:relative;height:400px;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,var(--bg-card),#1e2a3a);display:flex;align-items:center;justify-content:center}
+.about-image::after{content:'';position:absolute;inset:0;border:1px solid rgba(245,166,35,.15);border-radius:var(--radius)}
+.about-image-placeholder{font-family:var(--font-display);font-size:1.2rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+.about-text .section-desc{margin-bottom:24px}
+.about-stats-row{display:flex;gap:40px;margin-top:32px}
+.about-stat-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent)}
+.about-stat-label{font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+
+/* ---- SERVICES ---- */
+#services{background:var(--bg-primary)}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.service-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.04);border-radius:var(--radius);padding:40px 28px;transition:var(--transition);position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-hot));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.service-card:hover{transform:translateY(-4px);border-color:rgba(245,166,35,.15);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(255,107,43,.08));display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.5rem}
+.service-title{font-family:var(--font-display);font-size:1.25rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.service-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.6}
+
+/* ---- STATS ---- */
+#stats{background:linear-gradient(135deg,#0f1923 0%,#162033 50%,#0f1923 100%);border-top:1px solid rgba(245,166,35,.08);border-bottom:1px solid rgba(245,166,35,.08)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.stat-number{font-family:var(--font-display);font-size:clamp(2.5rem,4vw,3.5rem);font-weight:700;color:var(--accent);line-height:1}
+.stat-suffix{font-size:.6em;color:var(--accent-hot)}
+.stat-label{font-size:.875rem;color:var(--text-secondary);margin-top:8px;text-transform:uppercase;letter-spacing:2px}
+.stat-divider{width:40px;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin:12px auto 0}
+.stat-subtitle{font-size:.75rem;color:var(--text-muted);margin-top:6px;max-width:220px;margin-left:auto;margin-right:auto}
+
+/* ---- TESTIMONIALS ---- */
+#testimonials{background:var(--bg-secondary)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.testimonial-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.04);border-radius:var(--radius);padding:36px 28px;transition:var(--transition);position:relative}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3);border-color:rgba(74,111,165,.2)}
+.testimonial-quote{font-size:.95rem;color:var(--text-secondary);line-height:1.7;margin-bottom:24px;font-style:italic}
+.testimonial-quote::before{content:'\201C';font-family:var(--font-display);font-size:3rem;color:var(--accent);opacity:.3;line-height:0;vertical-align:-16px;margin-right:4px}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--steel-blue),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:.875rem;color:#0d0d0d}
+.testimonial-name{font-weight:600;font-size:.9rem}
+.testimonial-role{font-size:.8rem;color:var(--text-muted)}
+
+/* ---- LOCATIONS ---- */
+#locations{background:var(--bg-primary)}
+.locations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.location-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.04);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:var(--transition)}
+.location-card:hover{border-color:rgba(245,166,35,.15);transform:translateY(-2px)}
+.location-icon{font-size:2rem;margin-bottom:16px}
+.location-city{font-family:var(--font-display);font-size:1.25rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.location-address{font-size:.85rem;color:var(--text-secondary);line-height:1.6}
+
+/* ---- CTA ---- */
+#cta{background:linear-gradient(135deg,#1a1a2e,#16213e);position:relative;overflow:hidden;text-align:center}
+#cta::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(245,166,35,.04) 0%,transparent 50%);animation:ctaPulse 8s ease infinite}
+@keyframes ctaPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.cta-content{position:relative}
+.cta-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.cta-desc{color:var(--text-secondary);font-size:1.1rem;max-width:500px;margin:0 auto 40px;line-height:1.7}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-disclaimer{font-size:.75rem;color:var(--text-muted);margin-top:24px;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* ---- FOOTER ---- */
+#footer{background:var(--bg-secondary);border-top:1px solid rgba(255,255,255,.04);padding:60px 0 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand .nav-logo{margin-bottom:16px;display:inline-block}
+.footer-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.7;max-width:280px}
+.footer-heading{font-family:var(--font-display);font-size:.875rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;color:var(--text-primary)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:.875rem;color:var(--text-secondary);transition:var(--transition)}
+.footer-links a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.04);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1024px){
+  .services-grid,.stats-grid,.locations-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(13,13,13,.98);flex-direction:column;padding:24px;gap:16px}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:flex}
+  .about-grid{grid-template-columns:1fr}
+  .about-image{height:260px}
+  .testimonials-grid{grid-template-columns:1fr}
+  .services-grid,.stats-grid,.locations-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">MPI <span>Products</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#stats">Results</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#cta" class="btn btn-primary" style="padding:10px 24px;font-size:.8rem">Get a Quote</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="sparks">
+    <div class="spark"></div><div class="spark"></div><div class="spark"></div><div class="spark"></div>
+    <div class="spark"></div><div class="spark"></div><div class="spark"></div><div class="spark"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Precision Fineblanking</p>
+    <h1 class="hero-headline">We Make Metal Flat. Unreasonably Flat.</h1>
+    <p class="hero-sub">Precision fineblanking, stamping &amp; machining for people who think 0.006mm tolerance is 'good enough.' (It's not. We can go flatter.)</p>
+    <a href="#cta" class="btn btn-primary">Get Unreasonably Flat</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-image reveal">
+      <span class="about-image-placeholder">⚙️ Precision Engineering</span>
+    </div>
+    <div class="about-text">
+      <p class="section-tag reveal">About Us</p>
+      <h2 class="section-title reveal">About MPI Products</h2>
+      <p class="section-desc reveal">Founded on the radical belief that metal should be flat — like, obsessively, concerningly flat — MPI Products has spent decades perfecting the art of fineblanking. While other companies were out there living their lives, we were in the shop, measuring flatness to the sixth decimal place and arguing about microns. We hold IATF and ISO 14001 certifications, which is corporate-speak for 'we care about quality so much it's basically a personality disorder.'</p>
+      <p class="section-desc reveal" style="margin-top:12px">From 150-ton presses to 1,500-ton presses, we don't just stamp metal — we give it an existential crisis about what it means to be truly flat. Steel, aluminum, copper, bi-metal — we don't discriminate. If it's metal and it needs to be flat, we're already emotionally invested.</p>
+      <div class="about-stats-row reveal">
+        <div>
+          <div class="about-stat-num">0.006mm</div>
+          <div class="about-stat-label">Flatness Tolerance</div>
+        </div>
+        <div>
+          <div class="about-stat-num">1,500T</div>
+          <div class="about-stat-label">Max Press Force</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">What We Do</p>
+      <h2 class="section-title reveal">Our Expertise</h2>
+      <p class="section-desc reveal">Four ways we make metal do things it didn't know it could do.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">⚙️</div>
+        <h3 class="service-title">Precision Fineblanking</h3>
+        <p class="service-desc">Our bread and butter. We take sheets of metal and blank them so fine that electron microscopes send us fan mail. Tolerances so tight they make Swiss watchmakers nervous. <em>So flat, physicists ask us for calibration references.</em></p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🔧</div>
+        <h3 class="service-title">Progressive &amp; Transfer Stamping</h3>
+        <p class="service-desc">Multiple operations, one continuous flow, zero drama. Our progressive dies move metal through stages like a spa treatment — except instead of leaving relaxed, it leaves dimensionally perfect. <em>We hit metal repeatedly and call it precision.</em></p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🏗️</div>
+        <h3 class="service-title">Precision Grinding</h3>
+        <p class="service-desc">For when fineblanking alone isn't enough to satisfy our deeply personal need for perfection. We grind surfaces to tolerances that would make a laser level feel inadequate. <em>We grind because we care. Possibly too much.</em></p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">📐</div>
+        <h3 class="service-title">CNC Machining</h3>
+        <p class="service-desc">Computer-controlled cutting for complex geometries that make normal machinists quietly excuse themselves from the room. If you can CAD it, we can machine it. If you can't CAD it, we'll judge you silently. <em>Letting robots do the precision work since before it was cool.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-number"><span class="counter" data-target="0.006">0</span><span class="stat-suffix">mm</span></div>
+        <div class="stat-label">Flatness tolerance</div>
+        <div class="stat-divider"></div>
+        <div class="stat-subtitle">That's 6 microns. A human hair is 70. We could split your hair 11 times and still have room to judge.</div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="stat-number"><span class="counter" data-target="1500">0</span><span class="stat-suffix">T</span></div>
+        <div class="stat-label">Max press tonnage</div>
+        <div class="stat-divider"></div>
+        <div class="stat-subtitle">Roughly the weight of 10 grand pianos falling on your metal at once. But, like, precisely.</div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="stat-number"><span class="counter" data-target="4">0</span><span class="stat-suffix"></span></div>
+        <div class="stat-label">Facilities across North America</div>
+        <div class="stat-divider"></div>
+        <div class="stat-subtitle">Strategically located so nowhere on the continent is safe from our flatness obsession.</div>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="stat-number"><span>∞</span></div>
+        <div class="stat-label">Microns we've argued about internally</div>
+        <div class="stat-divider"></div>
+        <div class="stat-subtitle">Our quality team has feelings about tolerances. Strong feelings. HR is aware.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">Testimonials</p>
+      <h2 class="section-title reveal">What People Say*</h2>
+      <p class="section-desc reveal">*Results may include involuntary opinions about microns.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">I asked MPI for a part with tight tolerances. They delivered it and then emailed me a 14-page document explaining how they could have made it even tighter. I didn't ask for that. I didn't want that. But I respect it.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DK</div>
+          <div>
+            <div class="testimonial-name">Dave K.</div>
+            <div class="testimonial-role">Procurement Manager, Automotive OEM</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-quote">My wife left me because I wouldn't stop talking about MPI's 0.006mm flatness capabilities at dinner parties. Worth it. Those parts are *immaculate*.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">GT</div>
+          <div>
+            <div class="testimonial-name">Greg T.</div>
+            <div class="testimonial-role">Senior Engineer, Industrial Components</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-quote">I Googled 'what is fineblanking' before our first call with MPI. Three years later I have a fineblanking tattoo. I don't want to talk about it.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RM</div>
+          <div>
+            <div class="testimonial-name">Rachel M.</div>
+            <div class="testimonial-role">Supply Chain Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section id="locations">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">Our Locations</p>
+      <h2 class="section-title reveal">Where The Flatness Happens</h2>
+      <p class="section-desc reveal">Four facilities. One obsession.</p>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card reveal">
+        <div class="location-icon">🏢</div>
+        <h3 class="location-city">Troy, MI</h3>
+        <p class="location-address">World Headquarters: The nerve center. Where executives stare at flatness reports the way normal people look at sunsets. Conveniently located in Michigan, where the roads remind us daily why precision matters.</p>
+      </div>
+      <div class="location-card reveal reveal-delay-1">
+        <div class="location-icon">🏭</div>
+        <h3 class="location-city">Deerfield, WI</h3>
+        <p class="location-address">Manufacturing: Nestled in America's Dairyland, where our commitment to flatness rivals Wisconsin's commitment to cheese. The cows don't understand what we do here, and honestly, most humans don't either.</p>
+      </div>
+      <div class="location-card reveal reveal-delay-2">
+        <div class="location-icon">🏭</div>
+        <h3 class="location-city">Knox, IN</h3>
+        <p class="location-address">Manufacturing: Our Indiana facility, where Hoosier hospitality meets industrial-grade stamping pressure. 1,500 tons of force applied with midwestern politeness.</p>
+      </div>
+      <div class="location-card reveal reveal-delay-3">
+        <div class="location-icon">🏭</div>
+        <h3 class="location-city">Querétaro, Mexico</h3>
+        <p class="location-address">Manufacturing: Precision without borders. Our Querétaro team delivers the same obsessive flatness, now with better weather and significantly superior lunch options.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container cta-content">
+    <p class="section-tag reveal">Get Started</p>
+    <h2 class="cta-title reveal">Ready to Get Flat?</h2>
+    <p class="cta-desc reveal">Look, you Googled 'fineblanking' and somehow ended up here. That's fate. That's the universe telling you your parts need to be flatter. Don't fight it.</p>
+    <div class="cta-buttons reveal">
+      <a href="#" class="btn btn-primary">Request a Quote Before We Get Even More Precise</a>
+      <a href="#" class="btn btn-outline">Learn More (We Dare You)</a>
+    </div>
+    <p class="cta-disclaimer reveal">* Side effects may include: unreasonable expectations for flatness in all other areas of life, newfound opinions about press tonnage, and the inability to look at stamped metal the same way ever again.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">MPI <span>Products</span></a>
+        <p class="footer-desc">MPI Products — Unreasonably Flat Since Day One.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Services</h4>
+        <ul class="footer-links">
+          <li><a href="#">Precision Fineblanking</a></li>
+          <li><a href="#">Progressive &amp; Transfer Stamping</a></li>
+          <li><a href="#">Precision Grinding</a></li>
+          <li><a href="#">CNC Machining</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Company</h4>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:flatness@mpiproducts.com">flatness@mpiproducts.com</a></li>
+          <li><a href="tel:+12485553528">(248) 555-FLAT</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MPI Products. All tolerances reserved.</span>
+      <span>MPI Products — Unreasonably Flat Since Day One.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile toggle
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// Intersection Observer for reveals
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }});
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Animated counters
+let countersDone = false;
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !countersDone) {
+      countersDone = true;
+      document.querySelectorAll('.counter').forEach(c => {
+        const target = +c.dataset.target;
+        if (isNaN(target) || target === 0) return;
+        const isDecimal = target < 1;
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        const update = () => {
+          current += step;
+          if (current >= target) {
+            c.textContent = isDecimal ? target.toFixed(3) : target.toLocaleString();
+            return;
+          }
+          c.textContent = isDecimal ? current.toFixed(3) : Math.floor(current).toLocaleString();
+          requestAnimationFrame(update);
+        };
+        update();
+      });
+    }
+  });
+}, { threshold: 0.3 });
+counterObserver.observe(document.getElementById('stats'));
+</script>
+</body>
+</html>

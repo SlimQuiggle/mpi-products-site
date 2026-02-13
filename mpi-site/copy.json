@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "headline": "We Make Metal Flat. Unreasonably Flat.",
+    "subheadline": "Precision fineblanking, stamping & machining for people who think 0.006mm tolerance is 'good enough.' (It's not. We can go flatter.)"
+  },
+  "about": {
+    "title": "About MPI Products",
+    "description": "Founded on the radical belief that metal should be flat — like, obsessively, concerningly flat — MPI Products has spent decades perfecting the art of fineblanking. While other companies were out there living their lives, we were in the shop, measuring flatness to the sixth decimal place and arguing about microns. We hold IATF and ISO 14001 certifications, which is corporate-speak for 'we care about quality so much it's basically a personality disorder.' From 150-ton presses to 1,500-ton presses, we don't just stamp metal — we give it an existential crisis about what it means to be truly flat. Steel, aluminum, copper, bi-metal — we don't discriminate. If it's metal and it needs to be flat, we're already emotionally invested."
+  },
+  "services": [
+    {
+      "title": "Precision Fineblanking",
+      "description": "Our bread and butter. We take sheets of metal and blank them so fine that electron microscopes send us fan mail. Tolerances so tight they make Swiss watchmakers nervous.",
+      "tagline": "So flat, even your ex's personality can't compete."
+    },
+    {
+      "title": "Progressive & Transfer Stamping",
+      "description": "Multiple operations, one continuous flow, zero drama. Our progressive dies move metal through stages like a spa treatment — except instead of leaving relaxed, it leaves dimensionally perfect.",
+      "tagline": "We hit metal repeatedly and call it precision."
+    },
+    {
+      "title": "Precision Grinding",
+      "description": "For when fineblanking alone isn't enough to satisfy our deeply personal need for perfection. We grind surfaces to tolerances that would make a laser level feel inadequate.",
+      "tagline": "We grind because we care. Possibly too much."
+    },
+    {
+      "title": "CNC Machining",
+      "description": "Computer-controlled cutting for complex geometries that make normal machinists quietly excuse themselves from the room. If you can CAD it, we can machine it. If you can't CAD it, we'll judge you silently.",
+      "tagline": "Letting robots do the precision work since before it was cool."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "I asked MPI for a part with tight tolerances. They delivered it and then emailed me a 14-page document explaining how they could have made it even tighter. I didn't ask for that. I didn't want that. But I respect it.",
+      "author": "Dave K.",
+      "title": "Procurement Manager, Automotive OEM"
+    },
+    {
+      "quote": "My wife left me because I wouldn't stop talking about MPI's 0.006mm flatness capabilities at dinner parties. Worth it. Those parts are *immaculate*.",
+      "author": "Greg T.",
+      "title": "Senior Engineer, Industrial Components"
+    },
+    {
+      "quote": "I Googled 'what is fineblanking' before our first call with MPI. Three years later I have a fineblanking tattoo. I don't want to talk about it.",
+      "author": "Rachel M.",
+      "title": "Supply Chain Director"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Troy, MI",
+      "role": "World Headquarters",
+      "description": "The nerve center. Where executives stare at flatness reports the way normal people look at sunsets. Conveniently located in Michigan, where the roads remind us daily why precision matters."
+    },
+    {
+      "name": "Deerfield, WI",
+      "role": "Manufacturing",
+      "description": "Nestled in America's Dairyland, where our commitment to flatness rivals Wisconsin's commitment to cheese. The cows don't understand what we do here, and honestly, most humans don't either."
+    },
+    {
+      "name": "Knox, IN",
+      "role": "Manufacturing",
+      "description": "Our Indiana facility, where Hoosier hospitality meets industrial-grade stamping pressure. 1,500 tons of force applied with midwestern politeness."
+    },
+    {
+      "name": "Querétaro, Mexico",
+      "role": "Manufacturing",
+      "description": "Precision without borders. Our Querétaro team delivers the same obsessive flatness, now with better weather and significantly superior lunch options."
+    }
+  ],
+  "stats": [
+    {
+      "value": "0.006mm",
+      "label": "Flatness tolerance",
+      "subtitle": "That's 6 microns. A human hair is 70. We could split your hair 11 times and still have room to judge."
+    },
+    {
+      "value": "1,500T",
+      "label": "Max press tonnage",
+      "subtitle": "Roughly the weight of 10 grand pianos falling on your metal at once. But, like, precisely."
+    },
+    {
+      "value": "4",
+      "label": "Facilities across North America",
+      "subtitle": "Strategically located so nowhere on the continent is safe from our flatness obsession."
+    },
+    {
+      "value": "∞",
+      "label": "Microns we've argued about internally",
+      "subtitle": "Our quality team has feelings about tolerances. Strong feelings. HR is aware."
+    }
+  ],
+  "cta": {
+    "headline": "Ready to Get Flat?",
+    "description": "Look, you Googled 'fineblanking' and somehow ended up here. That's fate. That's the universe telling you your parts need to be flatter. Don't fight it.",
+    "buttonText": "Request a Quote Before We Get Even More Precise",
+    "disclaimer": "* Side effects may include: unreasonable expectations for flatness in all other areas of life, newfound opinions about press tonnage, and the inability to look at stamped metal the same way ever again."
+  },
+  "footer": {
+    "tagline": "MPI Products — Unreasonably Flat Since Day One.",
+    "copyright": "© 2026 MPI Products. All tolerances reserved."
+  }
+}
